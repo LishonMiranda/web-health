@@ -1,14 +1,113 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
-  <link href='/style.css' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Health</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js" defer></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js" defer></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js" defer></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-storage-compat.js" defer></script>
+
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
-  <script defer type="text/javascript" src="/main.js"></script>
+
+    <!-- Animated Intro Sequence -->
+    <div id="intro-sequence">
+        <div id="intro-greeting">Hello</div>
+        <div id="intro-quote">"The greatest wealth is health."</div>
+    </div>
+
+    <!-- Main App Wrapper -->
+    <div id="app-wrapper">
+
+        <!-- Left Navigation Sidebar -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h1>Web Health</h1>
+            </div>
+            <ul class="sidebar-nav-list">
+                <li class="nav-item active" data-target="dashboard">
+                    <span class="nav-text">Dashboard</span>
+                </li>
+                 <li class="nav-item" data-target="auth">
+                    <span class="nav-text">Login / Sign Up</span>
+                </li>
+                <!-- More nav items can be added here -->
+            </ul>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main id="main-content">
+            <header id="main-header">
+                <div class="header-left">
+                    <div class="brand">
+                        <span class="brand-mark">❤</span>
+                        <h1 class="brand-title">Web Health</h1>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <!-- Theme Toggle -->
+                    <button id="theme-toggle" class="glowing-btn icon-btn" aria-label="Toggle dark mode" title="Toggle theme">
+                        <span id="theme-toggle-icon" aria-hidden="true">🌙</span>
+                    </button>
+                    <div id="user-info" style="display: none;">
+                        <span id="username-display"></span>
+                        <button id="logout-btn">
+                            Logout
+                        </button>
+                    </div>
+                </div>
+            </header>
+            
+            <div class="content-container">
+                <!-- The content for dashboard or auth will be shown here -->
+
+                <!-- Auth Container (Initially Hidden) -->
+                <div id="auth-section" class="page-section">
+                    <div id="auth-container">
+                        <!-- Unified Auth Form -->
+                        <div class="form-container active">
+                            <form id="auth-form">
+                                <div class="form-row" id="username-row" style="display: none;">
+                                    <input type="text" id="username-input" placeholder="Choose a username">
+                                </div>
+                                <div class="form-row">
+                                    <input type="email" id="email-input" placeholder="Email address" required>
+                                </div>
+                                <div class="form-row">
+                                    <input type="password" id="password-input" placeholder="Password" required>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" id="auth-submit-btn" class="glowing-btn">Login</button>
+                                    <button type="button" id="auth-mode-toggle" class="link-btn" aria-label="Switch to sign up">New here? Sign up</button>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+
+                <!-- Dashboard Container (Initially Hidden) -->
+                <div id="dashboard-section" class="page-section" style="display: none;">
+                    <main-dashboard></main-dashboard>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <script src="auth.js" type="module"></script>
+    <script src="main.js" type="module"></script>
+
 </body>
 </html>
